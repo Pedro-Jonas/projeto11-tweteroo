@@ -1,16 +1,15 @@
 import express from 'express';
 
-const server = express();
 
-server.get("/tweets", (req , res) => {
-    const tweets = [
-        {
-        username: "bobesponja",
-        avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
-        tweet: "eu amo o hub"
-        }
-    ];
-    res.send(tweets);
+const server = express();
+server.use(express.json());
+
+const tweets = [];
+
+server.post("/tweets", (req, res) => {
+    const novotweet = req.body;
+    tweets.push(novotweet);
+    res.send("ok");
 });
 
 server.listen(5000);
