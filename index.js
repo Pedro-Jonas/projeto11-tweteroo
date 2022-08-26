@@ -1,18 +1,30 @@
 import express from 'express';
+import cors from 'cors';
 
 
 const server = express();
 server.use(express.json());
+server.use(cors());
 
 const tweets = [];
+const usuarios = [];
+
+server.post("/sing-up", (req, res) => {
+    const usuario = req.body;
+    usuarios.push(usuario);
+    res.send("ok");
+});
 
 server.post("/tweets", (req, res) => {
     const novotweet = req.body;
+    const infousuario = usuarios.find((elemento) => elemento.username === novotweet.username);
+    novotweet.avatar = infousuario.avatar;
     tweets.push(novotweet);
     res.send("ok");
 });
 
 server.get("/tweets", (req , res) => {
+    console.log(usuarios)
     tweets.reverse();
     let tweets10 = [];
     if (tweets.length > 10){
