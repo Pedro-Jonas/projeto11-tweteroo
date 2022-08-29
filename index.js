@@ -9,7 +9,7 @@ server.use(cors());
 const tweets = [];
 const usuarios = [];
 
-server.post("/sing-up", (req, res) => {
+server.post("/sign-up", (req, res) => {
     const usuario = req.body;
     usuarios.push(usuario);
     res.send("ok");
@@ -24,7 +24,6 @@ server.post("/tweets", (req, res) => {
 });
 
 server.get("/tweets", (req , res) => {
-    console.log(usuarios)
     tweets.reverse();
     let tweets10 = [];
     if (tweets.length > 10){
